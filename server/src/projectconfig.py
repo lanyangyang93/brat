@@ -205,7 +205,8 @@ def normalize_to_storage_form(t):
         n = t.replace(" ", "_")
         if isinstance(n, str):
             unicodedata.normalize('NFKD', n).encode('ascii', 'ignore')
-        n = re.sub(r'[^a-zA-Z0-9_-]', '_', n)
+        # n = re.sub(r'[^a-zA-Z0-9_-]', '_', n)
+        n = re.sub(u'[^a-zA-Z\u4e00-\u9fa5<>\u2014-\uff1b<>\x00-\xff<>,0-9_-]', '_', n)
 
         normalize_to_storage_form.__cache[t] = n
 
